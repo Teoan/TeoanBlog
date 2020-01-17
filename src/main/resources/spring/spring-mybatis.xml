@@ -92,6 +92,6 @@
 
     <!--事务的aop操作-->
     <aop:config>
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.teoan.blog.service.impl.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.teoan.blog.service.impl.*.*(..))"/>
     </aop:config>
 </beans>
