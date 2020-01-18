@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teoan.blog.mapper.CategoryMapper">
+    <resultMap id="BaseResultMap" type="com.teoan.blog.entity.Category" >
+        <result column="category_id" property="categoryId" jdbcType="INTEGER"/>
+        <result column="category_pid" property="categoryPid" jdbcType="INTEGER"/>
+        <result column="category_name" property="categoryName" jdbcType="VARCHAR"/>
+        <result column="category_description" property="categoryDescription" jdbcType="VARCHAR"/>
+        <result column="category_order" property="categoryOrder" jdbcType="INTEGER"/>
+        <result column="category_icon" property="categoryIcon" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.teoan.blog.entity.Category" useGeneratedKeys="true" keyProperty="category_id">
+    insert into category(category_pid, category_name,category_description, category_order, category_icon)
+    values (#{categoryPid,jdbcType=INTEGER}.#{categoryName,jdbcType=VARCHAR},#{categoryDescription,jdbcType=VARCHAR}
+     ,#{categoryOrder,jdbcType=INTEGER},#{categoryIcon,jdbcType=VARCHAR})
+    </insert>
+    <update id="update" parameterType="com.teoan.blog.entity.Category">
+        update
+        category
+        <set>
+            <if test="categoryPid!=null">category_pid = #{categoryPid,jdbcType=INTEGER},</if>
+            <if test="categoryName != null">category_name = #{categoryName,jdbcType=VARCHAR},</if>
+            <if test="categoryDescription != null">category_description = #{categoryDescription,jdbcType=VARCHAR},</if>
+            <if test="categoryOrder != null">category_order = #{categoryOrder,jdbcType=INTEGER},</if>
+            <if test="categoryIcon != null">category_icon = #{categoryIcon,jdbcType=VARCHAR},</if>
+        </set>
+        where category_id = #{categoryId,jdbcType=INTEGER}
+    </update>
+
+    <select id="getCategoryById" parameterType="java.lang.Integer" resultType="com.teoan.blog.entity.Category">
+        select * from category where category_id = #{value}
+    </select>
+
+    <delete id="deleteCategory" parameterType="java.lang.Integer">
+        delete from category where category_id = #{value}
+    </delete>
+
+    <select id="countCategory" resultType="java.lang.Integer">
+        select count(*) from category;
+    </select>
+
+
+    <select id="listCategort" resultType="com.teoan.blog.entity.Category">
+        select * from category order by category_order desc,category_id asc
+    </select>
+
+
+    <select id="findChildCategory" resultType="com.teoan.blog.entity.Category">
+        select * from category where category_pid =#{id}
+    </select>
+
+    <select id="getCategpryByName" resultType="com.teoan.blog.entity.Category">
+        select * from category where category_name=#{value} limit 1
+    </select>
+
+
+
+
+</mapper>
