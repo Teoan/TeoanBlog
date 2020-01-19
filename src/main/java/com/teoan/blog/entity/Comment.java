@@ -11,7 +11,7 @@ import java.util.Date;
  * @date 2020/1/15 16:18
  */
 @Data
-public class Commit implements Serializable {
+public class Comment implements Serializable {
     private static final long serialVersionUID = -1038897351672911219L;
     private Integer commentId;
 

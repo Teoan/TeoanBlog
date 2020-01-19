@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teoan.blog.mapper.CommentMapper">
+    <resultMap id="BaseResultMap" type="com.teoan.blog.entity.Comment">
+        <result column="comment_id" property="commentId" jdbcType="INTEGER"/>
+        <result column="comment_pid" property="commentPid" jdbcType="INTEGER"/>
+        <result column="comment_pname" property="commentPname" jdbcType="VARCHAR"/>
+        <result column="comment_article_id" property="commentArticleId" jdbcType="INTEGER"/>
+        <result column="comment_author_name" property="commentAuthorName" jdbcType="VARCHAR"/>
+        <result column="comment_author_email" property="commentAuthorEmail" jdbcType="VARCHAR"/>
+        <result column="comment_author_url" property="commentAuthorUrl" jdbcType="VARCHAR"/>
+        <result column="comment_author_avatar" property="commentAuthorAvatar" jdbcType="VARCHAR"/>
+        <result column="comment_content" property="commentContent" jdbcType="VARCHAR"/>
+        <result column="comment_agent" property="commentAgent" jdbcType="VARCHAR"/>
+        <result column="comment_ip" property="commentIp" jdbcType="VARCHAR"/>
+        <result column="comment_create_time" property="commentCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="comment_role" property="commentRole" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from comment where comment_id = #{value,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.teoan.blog.entity.Comment" useGeneratedKeys="true" keyProperty="commentId">
+        insert into comment(comment_pid, comment_pname, comment_article_id,
+                                     comment_author_name, comment_author_email,
+                                     comment_author_url, comment_author_avatar, comment_content, comment_agent,
+                                     comment_ip, comment_create_time, comment_role)
+        values (#{commentPid,jdbcType=INTEGER}, #{commentPname,jdbcType=VARCHAR}, #{commentArticleId,jdbcType=INTEGER},
+                #{commentAuthorName,jdbcType=VARCHAR}, #{commentAuthorEmail,jdbcType=VARCHAR},
+                #{commentAuthorUrl,jdbcType=VARCHAR},#{commentAuthorAvatar}, #{commentContent,jdbcType=VARCHAR},
+                #{commentAgent,jdbcType=VARCHAR},
+                #{commentIp,jdbcType=VARCHAR}, #{commentCreateTime,jdbcType=TIMESTAMP}, #{commentRole,jdbcType=INTEGER})
+    </insert>
+    <select id="getCommentById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select  *  from  comment
+        where comment_id = #{commentId,jdbcType=INTEGER}
+    </select>
+
+    <update id="update" parameterType="com.teoan.blog.entity.Comment">
+        update comment
+        <set>
+            <if test="commentPid != null">comment_pid = #{commentPid,jdbcType=INTEGER},</if>
+            <if test="commentPname != null">comment_pname = #{commentPname,jdbcType=VARCHAR},</if>
+            <if test="commentArticleId != null">comment_article_id = #{commentArticleId,jdbcType=INTEGER},</if>
+            <if test="commentAuthorName != null">comment_author_name = #{commentAuthorName,jdbcType=VARCHAR},</if>
+            <if test="commentAuthorEmail != null">comment_author_email = #{commentAuthorEmail,jdbcType=VARCHAR},</if>
+            <if test="commentAuthorUrl != null">comment_author_url = #{commentAuthorUrl,jdbcType=VARCHAR},</if>
+            <if test="commentContent != null">comment_content = #{commentContent,jdbcType=VARCHAR},</if>
+            <if test="commentAgent != null">comment_agent = #{commentAgent,jdbcType=VARCHAR},</if>
+            <if test="commentIp != null">comment_ip = #{commentIp,jdbcType=VARCHAR},</if>
+            <if test="commentCreateTime != null">comment_create_time = #{commentCreateTime,jdbcType=TIMESTAMP},</if>
+            <if test="commentAuthorAvatar != null">comment_author_avatar = #{commentAuthorAvatar},</if>
+            <if test="commentRole != null">comment_role = #{commentRole,jdbcType=INTEGER},</if>
+        </set>
+        where comment_id = #{commentId,jdbcType=INTEGER}
+    </update>
+
+    <select id="listCommenntByArticleId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select * from comment where comment_article_id = #{value} order by comment_id ASC
+    </select>
+
+    <select id="listComment" resultType="com.teoan.blog.entity.Comment">
+        select * from comment order by comment_id desc
+    </select>
+
+    <select id="countComment" resultType="java.lang.Integer">
+        select count(*) from comment
+    </select>
+
+    <!--获得最近评论，访客的评论-->
+    <select id="listRecentComment" parameterType="java.lang.Integer" resultType="com.teoan.blog.entity.Comment">
+        select * from comment where comment_role = 0
+        order by comment_id desc
+        limit #{limit}
+    </select>
+
+    <select id="listChildComment" resultType="com.teoan.blog.entity.Comment">
+        SELECT
+        *
+        FROM
+        comment
+        WHERE
+        comment_pid=#{id}
+    </select>
+
+
+
+
+</mapper>
