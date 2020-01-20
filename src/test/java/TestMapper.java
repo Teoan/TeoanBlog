@@ -38,6 +38,17 @@ public class TestMapper extends TestSpring {
     @Autowired(required = false)
     private NoticeMapper noticeMapper;
 
+    @Autowired(required = false)
+    private OptionsMapper optionsMapper;
+
+    @Autowired(required = false)
+    private PageMapper pageMapper;
+
+    @Autowired(required = false)
+    private TagMapper tagMapper;
+
+    @Autowired(required = false)
+    private UserMapper userMapper;
 
     @Test
     public void testDb(){
@@ -45,7 +56,13 @@ public class TestMapper extends TestSpring {
 //        logger.info(commentMapper.listComment());
 //        logger.info(linkMapper.listLink(1));
 //        logger.info(menuMapper.listMenu());
-        logger.info(noticeMapper.listNotice(1));
+//        logger.info(noticeMapper.listNotice(1));
+//        logger.info(optionsMapper.getOptions());
+//        logger.info(pageMapper.listPage(1));
+//        logger.info(tagMapper.countTag());
+        logger.info(userMapper.listUser());
+        logger.info(userMapper.getUserByEmail("admin@liuyanzhao.com"));
+
     }
 
 }
