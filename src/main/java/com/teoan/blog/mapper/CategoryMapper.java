@@ -65,5 +65,5 @@ public interface CategoryMapper {
      * @param:  分类名
      * @return:  分类
      */
-    Category getCategpryByName();
+    Category getCategpryByName(String name);
 }

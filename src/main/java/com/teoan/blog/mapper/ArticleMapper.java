@@ -187,4 +187,13 @@ public interface ArticleMapper {
      * @return:  影响行数
      */
     Integer deleteBatch(@Param("ids") List<Integer> ids);
+
+
+    /**
+     * @Description 更新文章评论数
+     * @Date 11:26 2020/1/23
+     * @Param 文章id
+     * @return
+     **/
+    void updateCommentCount(@Param(value = "articleId") Integer articleId);
 }
