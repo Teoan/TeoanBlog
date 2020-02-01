@@ -76,6 +76,6 @@ public interface CommentMapper {
      * @param:  评论id
      * @return:  列表
      */
-    List<Comment> linstChildComment(@Param(value = "id")Integer id);
+    List<Comment> listChildComment(@Param(value = "id")Integer id);
 
 }
