@@ -7,8 +7,7 @@ import com.teoan.blog.enums.ArticleCommentStatus;
 import com.teoan.blog.mapper.ArticleCategoryRefMapper;
 import com.teoan.blog.mapper.ArticleMapper;
 import com.teoan.blog.mapper.ArticleTagRefMapper;
-import com.teoan.blog.service.ArtcileService;
-import lombok.extern.slf4j.Slf4j;
+import com.teoan.blog.service.ArticleService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ import java.util.List;
  */
 
 @Service
-public class ArtcileServiceImpl implements ArtcileService {
+public class ArticleServiceImpl implements ArticleService {
 
     @Autowired(required = false)
     private ArticleMapper articleMapper;

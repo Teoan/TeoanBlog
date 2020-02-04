@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2020/1/21 11:18
  */
 
-public interface ArtcileService {
+public interface ArticleService {
 
 
     /**
