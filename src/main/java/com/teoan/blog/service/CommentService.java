@@ -11,7 +11,6 @@ import java.util.List;
  * @description 评论服务接口
  * @date 2020/2/1 15:15
  */
-@Service
 public interface CommentService {
 
     /**

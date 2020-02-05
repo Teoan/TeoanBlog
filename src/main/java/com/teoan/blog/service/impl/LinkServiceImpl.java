@@ -4,6 +4,7 @@ import com.teoan.blog.entity.Link;
 import com.teoan.blog.mapper.LinkMapper;
 import com.teoan.blog.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @description
  * @date 2020/2/1 16:42
  */
+@Service
 public class LinkServiceImpl implements LinkService {
 
     @Autowired(required = false)

@@ -42,7 +42,7 @@
                                 <a href="/category/${a.categoryList[a.categoryList.size()-1].categoryId}">
                                         ${a.categoryList[a.categoryList.size()-1].categoryName}
                                 </a>
-                            </span>
+                        </span>
                     </figure>
 
                     <header class="entry-header">

@@ -5,6 +5,7 @@ import com.teoan.blog.entity.Menu;
 import com.teoan.blog.mapper.MenuMapper;
 import com.teoan.blog.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * @description
  * @date 2020/2/1 16:52
  */
+@Service
 public class MenuServiceImpl implements MenuService {
 
     @Autowired(required = false)

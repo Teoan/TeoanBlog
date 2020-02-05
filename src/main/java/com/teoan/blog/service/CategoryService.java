@@ -23,7 +23,7 @@ public interface CategoryService {
      * @Param
      * @return 分类列表
      **/
-    List<Category> ListCategory();
+    List<Category> listCategory();
 
 
     /**

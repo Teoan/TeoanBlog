@@ -44,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> ListCategory() {
+    public List<Category> listCategory() {
         List<Category> categories = null;
        try{
            categories =categoryMapper.listCategort();
