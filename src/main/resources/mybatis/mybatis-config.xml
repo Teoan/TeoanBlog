@@ -12,7 +12,7 @@
     </settings>
 
     <plugins>
-        <plugin interceptor="com.github.pagehelper.PageHelper">
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
 
 <!--            offsetAsPageNum：默认值为 false，
 该参数对使用 RowBounds 作为分页参数时有效。 当该参数设置为 true 时，会将 RowBounds 中的 offset 参数当成 pageNum 使用，
