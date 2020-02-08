@@ -6,7 +6,10 @@ import com.teoan.blog.enums.ArticleStatus;
 import com.teoan.blog.enums.LinkStatus;
 import com.teoan.blog.enums.NoticeStatus;
 import com.teoan.blog.service.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.aspectj.asm.IModelFilter;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +42,7 @@ public class IndexController {
     @Autowired
     private CommentService commentService;
 
+//    private Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
     @RequestMapping(value = {"/","/article"})
     public String index(@RequestParam(required = false,defaultValue = "1") Integer pageIndex,
