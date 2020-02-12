@@ -68,6 +68,7 @@ public class ArticleController {
         //相关文章
         List<Integer> categoryIds = articleService.listCategoryIdByArticleId(articleId);
         List<Article> articleList = articleService.listArticleByCategoryIds(categoryIds,5);
+        model.addAttribute("similarArticleList", articleList);
 
         //猜你喜欢
         List<Article> mostViewArticleList = articleService.listArticleByViewCount(5);
