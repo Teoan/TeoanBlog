@@ -4,6 +4,7 @@ import com.teoan.blog.entity.Options;
 import com.teoan.blog.service.OptionsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,12 +30,11 @@ public class BackOptionsController {
      * @return:
      **/
     @RequestMapping("")
-    public ModelAndView index(){
-        ModelAndView modelAndView = new ModelAndView("Admin/Options/index");
+    public String index(Model model){
         Options option = optionsService.getOptions();
 
-        modelAndView.addObject("option",option);
-        return modelAndView;
+        model.addAttribute("option",option);
+        return "Admin/Options/index";
     }
 
 
@@ -45,12 +45,11 @@ public class BackOptionsController {
      * @return:
      **/
     @RequestMapping("/edit")
-    public ModelAndView editOptionView(){
-        ModelAndView modelAndView = new ModelAndView("Admin/Options/index");
+    public String editOptionView(Model model){
         Options option = optionsService.getOptions();
 
-        modelAndView.addObject("option",option);
-        return modelAndView;
+        model.addAttribute("option",option);
+        return "Admin/Options/index";
     }
 
 

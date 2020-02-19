@@ -5,11 +5,11 @@ import com.teoan.blog.service.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -36,13 +36,12 @@ public class BackUserController {
      * @return:
      **/
     @RequestMapping(value = "")
-    public ModelAndView userList()  {
-        ModelAndView modelandview = new ModelAndView("Admin/User/index");
-
+    public String userList(Model model)  {
         List<User> userList = userService.listUser();
-        modelandview.addObject("userList",userList);
 
-        return modelandview;
+        model.addAttribute("userList",userList);
+
+        return "Admin/User/index";
 
     }
 
@@ -53,9 +52,8 @@ public class BackUserController {
      * @return:
      **/
     @RequestMapping(value = "/insert")
-    public ModelAndView insertUserView()  {
-        ModelAndView modelAndView = new ModelAndView("Admin/User/insert");
-        return modelAndView;
+    public String insertUserView()  {
+        return "Admin/User/insert";
     }
 
 
@@ -130,12 +128,11 @@ public class BackUserController {
      * @Param:
      * @return:
      **/
-    public ModelAndView editUserView(@PathVariable("id") Integer id)  {
-        ModelAndView modelAndView = new ModelAndView("Admin/User/edit");
-
+    @RequestMapping("/edit/{id}")
+    public String editUserView(@PathVariable("id") Integer id,Model model)  {
         User user =  userService.getUserById(id);
-        modelAndView.addObject("user",user);
-        return modelAndView;
+        model.addAttribute("user",user);
+        return "Admin/User/edit";
     }
 
     /**
@@ -156,13 +153,12 @@ public class BackUserController {
      * @return:
      **/
     @RequestMapping(value = "/profile")
-    public ModelAndView userProfileView(HttpSession session)  {
+    public String userProfileView(HttpSession session,Model model)  {
 
-        ModelAndView modelAndView = new ModelAndView("Admin/User/profile");
         User sessionUser = (User) session.getAttribute("user");
         User user =  userService.getUserById(sessionUser.getUserId());
-        modelAndView.addObject("user",user);
-        return modelAndView;
+        model.addAttribute("user",user);
+        return "Admin/User/profile";
     }
 
 }

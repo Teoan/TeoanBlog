@@ -69,6 +69,7 @@ public class BackArticleController {
      * @Param:
      * @return:
      **/
+    @RequestMapping(value = "/insert")
     public String insertArticleView(Model model){
         List<Tag> tagList = tagService.listTag();
         List<Category> categoryList = categoryService.listCategory();

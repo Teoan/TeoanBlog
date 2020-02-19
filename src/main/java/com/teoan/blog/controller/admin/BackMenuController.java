@@ -1,5 +1,6 @@
 package com.teoan.blog.controller.admin;
 
+import cn.hutool.crypto.Mode;
 import com.teoan.blog.entity.Menu;
 import com.teoan.blog.enums.MenuLevel;
 import com.teoan.blog.service.MenuService;
@@ -65,16 +66,14 @@ public class BackMenuController {
      * @return:
      **/
     @RequestMapping("/edit/{id}")
-    public ModelAndView editMenuView(@PathVariable("id") Integer id){
-        ModelAndView modelAndView = new ModelAndView("Admin/Menu/edit");
-
+    public String editMenuView(@PathVariable("id") Integer id, Model model){
         Menu menu =  menuService.getMenuById(id);
-        modelAndView.addObject("menu",menu);
+        model.addAttribute("menu",menu);
 
         List<Menu> menuList = menuService.listMenu();
-        modelAndView.addObject("menuList",menuList);
+        model.addAttribute("menuList",menuList);
 
-        return modelAndView;
+        return "Admin/Menu/edit";
     }
 
 

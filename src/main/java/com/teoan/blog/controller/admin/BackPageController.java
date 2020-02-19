@@ -5,6 +5,7 @@ import com.teoan.blog.enums.PageStatus;
 import com.teoan.blog.service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,11 +33,11 @@ public class BackPageController {
      * @return:
      **/
     @RequestMapping(value = "")
-    public ModelAndView index(){
-        ModelAndView modelAndView = new ModelAndView("Admin/Page/index");
+    public String index(Model model){
+
         List<Page> pageList = pageService.listPage(null);
-        modelAndView.addObject("pageList",pageList);
-        return modelAndView;
+        model.addAttribute("pageList",pageList);
+        return "Admin/Page/index";
     }
 
 
@@ -46,9 +47,8 @@ public class BackPageController {
      * @return:
      **/
     @RequestMapping("/insert")
-    public ModelAndView insertPageView(){
-        ModelAndView modelAndView = new ModelAndView("Admin/Page/insert");
-        return modelAndView;
+    public String insertPageView(){
+        return "Admin/Page/insert";
     }
 
 
@@ -89,11 +89,10 @@ public class BackPageController {
      * @return:
      **/
     @RequestMapping("/edit/{id}")
-    public ModelAndView editPageView(@PathVariable("id") Integer id){
-        ModelAndView modelAndView = new ModelAndView("Admin/Page/edit");
+    public String editPageView(@PathVariable("id") Integer id,Model model){
         Page page = pageService.getPageById(id);
-        modelAndView.addObject("page",page);
-        return modelAndView;
+        model.addAttribute("page",page);
+        return "Admin/Page/edit";
     }
 
 

@@ -32,18 +32,10 @@ public class BackCategoryController {
      * @Param:
      * @return:
      **/
-//    @RequestMapping("")
-//    public ModelAndView categoryList(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        List<Category> categoryList = categoryService.listCategory();
-//        modelAndView.addObject("categoryList",categoryList);
-//        modelAndView.setViewName("Admin/Category/index");
-//        return modelAndView;
-//    }
 
     @RequestMapping("")
     public String categoryList(Model model ){
-        List<Category> categoryList = categoryService.listCategory();
+        List<Category> categoryList = categoryService.listCategoryWithCount();
         model.addAttribute("categoryList",categoryList);
         return "Admin/Category/index";
     }
@@ -82,17 +74,17 @@ public class BackCategoryController {
      * @return:
      **/
     @RequestMapping("/edit/{id}")
-    public ModelAndView editCategoryView(@PathVariable("id") Integer id)  {
-        ModelAndView modelAndView = new ModelAndView();
+    public String editCategoryView(@PathVariable("id") Integer id,Model model)  {
+
 
         Category category =  categoryService.getCategoryById(id);
-        modelAndView.addObject("category",category);
+
+        model.addAttribute("category",category);
 
         List<Category> categoryList = categoryService.listCategoryWithCount();
-        modelAndView.addObject("categoryList",categoryList);
+        model.addAttribute("categoryList",categoryList);
 
-        modelAndView.setViewName("Admin/Category/edit");
-        return modelAndView;
+        return "Admin/Category/edit";
     }
 
 

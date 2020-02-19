@@ -4,6 +4,7 @@ import com.teoan.blog.entity.Link;
 import com.teoan.blog.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,14 +32,12 @@ public class BackLinkController {
      * @return:
      **/
     @RequestMapping("")
-    public ModelAndView linkList(){
-        ModelAndView modelAndView = new ModelAndView();
+    public String linkList(Model model){
 
         List<Link> linkList = linkService.listLink(null);
-        modelAndView.addObject("linkList",linkList);
-        modelAndView.setViewName("Admin/Link/index");
+        model.addAttribute("linkList",linkList);
 
-        return modelAndView;
+        return "Admin/Link/index";
     }
 
 
@@ -48,11 +47,10 @@ public class BackLinkController {
      * @return:
      **/
     @RequestMapping("/insert")
-    public ModelAndView insertLinkView(){
-        ModelAndView modelAndView = new ModelAndView("Admin/Link/insert");
+    public String insertLinkView(Model model){
         List<Link> linkList = linkService.listLink(null);
-        modelAndView.addObject("linkList",linkList);
-        return modelAndView;
+        model.addAttribute("linkList",linkList);
+        return "Admin/Link/insert";
     }
 
 
@@ -75,16 +73,16 @@ public class BackLinkController {
      * @return:
      **/
     @RequestMapping("/edit/{id}")
-    public ModelAndView editLinkView(@PathVariable("id") Integer id){
-        ModelAndView modelAndView = new ModelAndView("Admin/Link/edit");
+    public String editLinkView(@PathVariable("id") Integer id,Model model){
 
         //获得链接属性
         Link linkCustom =  linkService.getLinkById(id);
-        modelAndView.addObject("linkCustom",linkCustom);
+        model.addAttribute("linkCustom",linkCustom);
 
         List<Link> linkList = linkService.listLink(null);
-        modelAndView.addObject("linkList",linkList);
-        return modelAndView;
+        model.addAttribute("linkList",linkList);
+
+        return "Admin/Link/edit";
     }
 
     /**

@@ -5,10 +5,11 @@ import com.teoan.blog.service.ArticleService;
 import com.teoan.blog.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import java.util.List;
 
@@ -34,14 +35,11 @@ public class BackTagController {
      * @return:
      **/
     @RequestMapping("")
-    public ModelAndView index(){
-        ModelAndView modelAndView = new ModelAndView("Admin/Tag/index");
+    public String index(Model model){
 
         List<Tag> tagList = tagService.listTag();
-
-        modelAndView.addObject("tagList",tagList);
-
-        return modelAndView;
+        model.addAttribute("tagList",tagList);
+        return "Admin/Tag/index";
     }
 
     /**
@@ -77,15 +75,14 @@ public class BackTagController {
      * @return:
      **/
     @RequestMapping(value = "/edit/{id}")
-    public ModelAndView editTagView(@PathVariable("id") Integer id)  {
-        ModelAndView modelAndView = new ModelAndView("Admin/Tag/edit");
-
+    public String editTagView(@PathVariable("id") Integer id,Model model)  {
         Tag tag =  tagService.getTagById(id);
-        modelAndView.addObject("tag",tag);
+        model.addAttribute("tag",tag);
 
         List<Tag> tagList = tagService.listTagWithCount();
-        modelAndView.addObject("tagList",tagList);
-        return modelAndView;
+
+        model.addAttribute("tagList",tagList);
+        return "Admin/Tag/edit";
     }
 
     /**
