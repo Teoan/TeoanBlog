@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.Map;
 
 /**
  * @author Teoan
@@ -30,7 +31,7 @@ public class UploadFileController {
     private Logger log = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
     @RequestMapping(value = "/img",method = RequestMethod.POST)
-    public JsonResult uploadFile(@RequestParam("file") MultipartFile file){
+    public Map<String, Object> uploadFile(@RequestParam("file") MultipartFile file){
 
         //1.文件后缀过滤，只允许部分后缀
         //文件的完整名称,如spring.jpeg
@@ -41,7 +42,7 @@ public class UploadFileController {
         String suffix = filename.substring(filename.lastIndexOf("."));
 
         if (allowSuffix.indexOf(suffix) == -1) {
-            return new JsonResult().fail("不允许上传该后缀的文件！");
+            return JsonResult.fail("不允许上传该后缀的文件！");
         }
 
 
@@ -85,7 +86,7 @@ public class UploadFileController {
         UploadFileVO uploadFileVO = new UploadFileVO();
         uploadFileVO.setTitle(filename);
         uploadFileVO.setSrc(fileUrl);
-        return new JsonResult().ok(uploadFileVO);
+        return JsonResult.ok("",uploadFileVO);
     }
 
 

@@ -60,10 +60,6 @@ public class TagController {
         List<Article> articleList = articleService.listRandomArticle(8);
         model.addAttribute("randomArticleList", articleList);
 
-        //热评文章显示
-        List<Article> mostCommentArticleList = articleService.listArticleByCommentCount(8);
-        model.addAttribute("mostCommentArticleList",mostCommentArticleList);
-
 
         model.addAttribute("pageUrlPrefix", "/tag?pageIndex");
 

@@ -169,12 +169,12 @@ function checkUserEmail() {
         data: {"email": $("#userEmail").val(), "id": $("#userId").val()},
         dataType: "json",
         success: function (data) {
-            //用户名存在
+            //邮箱存在
             if(data.code==1) {
                 $("#userEmailTips").html(data.msg);
                 result=1;
             }
-            //用户名不存在
+            //邮箱不存在
             if(data.code==0) {
                 $("#userEmailTips").html(data.msg);
                 result=0;

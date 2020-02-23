@@ -1,8 +1,11 @@
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.teoan.blog.entity.Article;
 import com.teoan.blog.entity.Category;
 import com.teoan.blog.entity.Tag;
 import com.teoan.blog.enums.ArticleStatus;
 import com.teoan.blog.mapper.*;
+import com.teoan.blog.service.ArticleService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.checkerframework.checker.units.qual.A;
@@ -56,6 +59,9 @@ public class TestMapper extends TestSpring {
     @Autowired(required = false)
     private ArticleMapper articleMapper;
 
+    @Autowired
+    private ArticleService articleService;
+
     @Test
     public void testDb(){
         Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
@@ -68,10 +74,14 @@ public class TestMapper extends TestSpring {
 //        logger.info(tagMapper.countTag());
 //        logger.info(userMapper.listUser());
 //        logger.info(userMapper.getUserByEmail("admin@liuyanzhao.com"));
-        PageHelper.startPage(1, 10);
-        HashMap<String,Object> criteria = new HashMap<>(1);
-        criteria.put("status", ArticleStatus.PUBLISH.getValue());
-        logger.info(articleMapper.findAll(criteria));
+//        PageHelper.startPage(1, 10);
+//        HashMap<String,Object> criteria = new HashMap<>(1);
+//        criteria.put("status", ArticleStatus.PUBLISH.getValue());
+//        logger.info(articleMapper.findAll(criteria));
+
+        logger.info(categoryMapper.listCategort());
+
+
 
     }
 

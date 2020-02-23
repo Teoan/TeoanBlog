@@ -1,53 +1,46 @@
 package com.teoan.blog.dto;
 
-import lombok.Data;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Teoan
  * @description
- * @date 2020/2/6 12:47
+ * @date 2020/2/19 15:11
  */
-@Data
-public class JsonResult<T> {
+public class JsonResult {
 
-    /**
-     * 错误码
-     **/
-    private Integer code;
+    private static Map<String, Object> map = new HashMap<String, Object>(3);
 
-    /**
-     * 提示信息
-     */
-    private String msg;
-
-    /**
-     * 返回的具体内容
-     */
-    private T data;
-
-    public JsonResult(Integer code, String msg, T data) {
-        this.code = code;
-        this.msg = msg;
-        this.data = data;
+    public static Map<String, Object> fail(String msg, Object data){
+        map.clear();
+        map.put("code",1);
+        map.put("msg",msg);
+        map.put("data",data);
+        return map;
     }
 
-    public JsonResult() {
-    }
-
-    public JsonResult fail() {
-        return new JsonResult(1, "操作失败", null);
-    }
-
-    public JsonResult fail(String msg) {
-        return new JsonResult(1, msg, null);
-    }
-
-    public JsonResult ok() {
-        return new JsonResult(0, "操作成功", null);
+    public static Map<String, Object> fail(String msg){
+        map.clear();
+        map.put("code",1);
+        map.put("msg",msg);
+        return map;
     }
 
 
-    public JsonResult ok(T data) {
-        return new JsonResult(0, "操作成功", data);
+    public static Map<String, Object> ok(String msg,Object data){
+        map.clear();
+        map.put("code",0);
+        map.put("msg",msg);
+        map.put("data",data);
+        return map;
+    }
+
+
+    public static Map<String, Object> ok(String msg){
+        map.clear();
+        map.put("code",0);
+        map.put("msg",msg);
+        return map;
     }
 }

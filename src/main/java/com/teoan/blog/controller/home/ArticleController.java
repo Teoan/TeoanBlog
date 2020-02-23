@@ -89,9 +89,6 @@ public class ArticleController {
         //获得随机文章
         List<Article> randomArticleList = articleService.listRandomArticle(8);
         model.addAttribute("randomArticleList", randomArticleList);
-        //获得热评文章
-        List<Article> mostCommentArticleList = articleService.listArticleByCommentCount(8);
-        model.addAttribute("mostCommentArticleList", mostCommentArticleList);
 
         return "Home/Page/articleDetail";
     }

@@ -42,7 +42,6 @@ public class IndexController {
     @Autowired
     private CommentService commentService;
 
-//    private Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 
     @RequestMapping(value = {"/","/article"})
     public String index(@RequestParam(required = false,defaultValue = "1") Integer pageIndex,
@@ -96,9 +95,6 @@ public class IndexController {
         List<Article> randomArticleList = articleService.listRandomArticle(8);
         model.addAttribute("randomArticleList", randomArticleList);
 
-        //获得热评文章
-        List<Article> mostCommentArticleList = articleService.listArticleByCommentCount(8);
-        model.addAttribute("mostCommentArticleList", mostCommentArticleList);
 
         //最新评论
         List<Comment> recentCommentList = commentService.listRecentComment(10);

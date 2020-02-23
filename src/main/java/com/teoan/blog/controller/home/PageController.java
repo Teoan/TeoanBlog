@@ -49,9 +49,6 @@ public class PageController {
         model.addAttribute("page",page);
 
         //侧边栏显示
-        //获得热评文章
-        List<Article> mostCommentArticleList = articleService.listArticleByCommentCount(8);
-        model.addAttribute("mostCommentArticleList", mostCommentArticleList);
         return "Home/Page/page";
     }
 
@@ -65,9 +62,6 @@ public class PageController {
         List<Article> articleList = articleService.listAllNotWithContent();
         model.addAttribute("articleList", articleList);
         //侧边栏显示
-        //获得热评文章
-        List<Article> mostCommentArticleList = articleService.listArticleByCommentCount(10);
-        model.addAttribute("mostCommentArticleList", mostCommentArticleList);
         return "Home/Page/articleFile";
     }
 
@@ -89,10 +83,6 @@ public class PageController {
         List<Tag> tagList = tagService.listTag();
         model.addAttribute("tagList", tagList);
 
-        //侧边栏显示
-        //获得热评文章
-        List<Article> mostCommentArticleList = articleService.listArticleByCommentCount(10);
-        model.addAttribute("mostCommentArticleList", mostCommentArticleList);
         return "Home/Page/siteMap";
 
     }

@@ -1,6 +1,7 @@
 package com.teoan.blog.controller.admin;
 
 import cn.hutool.crypto.Mode;
+import com.teoan.blog.dto.JsonResult;
 import com.teoan.blog.entity.Article;
 import com.teoan.blog.entity.Comment;
 import com.teoan.blog.entity.User;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Teoan
@@ -80,8 +82,8 @@ public class AdminController {
      **/
     @RequestMapping(value = "/loginVerify",method = RequestMethod.POST)
     @ResponseBody
-    public String loginVerify(HttpServletRequest request, HttpServletResponse response){
-        HashMap<String,Object> map = new HashMap<String,Object>();
+    public Map<String,Object> loginVerify(HttpServletRequest request, HttpServletResponse response){
+        Map<String,Object> map;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String rememberme = request.getParameter("rememberme");
@@ -90,15 +92,12 @@ public class AdminController {
 
         //登录校验
         if (user==null){
-            map.put("code",0);
-            map.put("msg","用户名无效！");
+            map = JsonResult.fail("用户名无效！");
         }else if (!user.getUserPass().equals(password)){
-            map.put("code",0);
-            map.put("msg","密码无效！");
+            map = JsonResult.fail("密码无效！");
         }else{
             //登录成功
-            map.put("code",1);
-            map.put("msg","");
+            map = JsonResult.ok("");
 
             //添加到Session域中
             request.getSession().setAttribute("user",user);
@@ -121,8 +120,7 @@ public class AdminController {
             user.setUserLastLoginIp(MyUtils.getIpAddr(request));
             userService.updateUser(user);
         }
-        String result = new JSONObject(map).toString();
-        return result;
+        return map;
     }
 
     /**

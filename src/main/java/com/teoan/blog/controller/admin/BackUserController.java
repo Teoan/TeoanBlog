@@ -1,5 +1,6 @@
 package com.teoan.blog.controller.admin;
 
+import com.teoan.blog.dto.JsonResult;
 import com.teoan.blog.entity.User;
 import com.teoan.blog.service.UserService;
 import org.json.JSONObject;
@@ -64,7 +65,7 @@ public class BackUserController {
      **/
     @RequestMapping(value = "/checkUserName",method = RequestMethod.POST)
     @ResponseBody
-    public String checkUserName(HttpServletRequest request)  {
+    public Map<String, Object> checkUserName(HttpServletRequest request)  {
         Map<String, Object> map = new HashMap<String, Object>();
         String username = request.getParameter("username");
         User user = userService.getUserByName(username);
@@ -72,15 +73,11 @@ public class BackUserController {
         //用户名已存在,但不是当前用户(编辑用户的时候，不提示)
         if(user!=null) {
             if(user.getUserId()!=id) {
-                map.put("code", 1);
-                map.put("msg", "用户名已存在！");
+                return JsonResult.fail("用户名已存在！");
             }
-        } else {
-            map.put("code",0);
-            map.put("msg","");
         }
-        String result = new JSONObject(map).toString();
-        return result;
+        return JsonResult.ok("");
+
     }
 
 
@@ -91,23 +88,18 @@ public class BackUserController {
      **/
     @RequestMapping(value = "/checkUserEmail",method = RequestMethod.POST)
     @ResponseBody
-    public String checkUserEmail(HttpServletRequest request)  {
-        Map<String, Object> map = new HashMap<String, Object>();
+    public Map<String, Object> checkUserEmail(HttpServletRequest request)  {
         String email = request.getParameter("email");
         User user = userService.getUserByEmail(email);
         int id = Integer.valueOf(request.getParameter("id"));
         //用户名已存在,但不是当前用户(编辑用户的时候，不提示)
         if(user!=null) {
             if(user.getUserId()!=id) {
-                map.put("code", 1);
-                map.put("msg", "电子邮箱已存在！");
+                return JsonResult.fail("电子邮箱已存在！");
             }
-        } else {
-            map.put("code",0);
-            map.put("msg","");
         }
-        String result = new JSONObject(map).toString();
-        return result;
+        return JsonResult.ok("");
+
     }
 
 

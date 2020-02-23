@@ -39,9 +39,6 @@ public class NoticeController {
         model.addAttribute("notice",notice);
 
         //侧边栏显示
-        //获得热评文章
-        List<Article> mostCommentArticleList = articleService.listArticleByCommentCount(8);
-        model.addAttribute("mostCommentArticleList", mostCommentArticleList);
 
         return "Home/Page/noticeDetail";
     }

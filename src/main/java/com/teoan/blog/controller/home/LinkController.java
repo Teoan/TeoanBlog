@@ -26,17 +26,13 @@ public class LinkController {
     @Autowired
     private LinkService linkService;
 
-    @Autowired
-    private ArticleService articleService;
 
     @RequestMapping("/applyLink")
-    public String applyLinkView(Model model){
+    public String applyLinkView(){
         //侧边栏显示
-        //获得热评文章
-        List<Article> mostCommentArticleList = articleService.listArticleByCommentCount(8);
-        model.addAttribute("mostCommentArticleList", mostCommentArticleList);
         return "Home/Page/applyLink";
     }
+
 
     @RequestMapping(value = "/applyLinkSubmit",method = {RequestMethod.POST})
     @ResponseBody

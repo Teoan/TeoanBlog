@@ -68,6 +68,11 @@ public class HomeResourceInterceptor implements HandlerInterceptor {
         Article lastUpdateArticle = articleService.getLastUpdateArticle();
         request.setAttribute("lastUpdateArticle", lastUpdateArticle);
 
+        //侧边栏显示
+        //获得热评文章
+        List<Article> mostCommentArticleList = articleService.listArticleByCommentCount(8);
+        request.setAttribute("mostCommentArticleList", mostCommentArticleList);
+
         //页脚显示
         //博客基本信息显示(Options)
         Options options = optionsService.getOptions();

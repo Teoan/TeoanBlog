@@ -2,9 +2,7 @@ package com.teoan.blog.controller.home;
 
 import cn.hutool.http.HtmlUtil;
 import com.teoan.blog.dto.JsonResult;
-import com.teoan.blog.entity.Article;
 import com.teoan.blog.entity.Comment;
-import com.teoan.blog.enums.ArticleStatus;
 import com.teoan.blog.enums.Role;
 import com.teoan.blog.service.ArticleService;
 import com.teoan.blog.service.CommentService;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author Teoan
@@ -37,8 +36,8 @@ public class CommentController {
      * @Description: 添加评论
      **/
 
-    @RequestMapping(value = "/comment", method = {RequestMethod.POST})
-    public JsonResult insertComment(HttpServletRequest request, Comment comment){
+    @RequestMapping(value = "/comment", method = RequestMethod.POST)
+    public Map<String, Object> insertComment(HttpServletRequest request, Comment comment){
         comment.setCommentCreateTime(new Date());
         comment.setCommentIp(MyUtils.getIpAddr(request));
 
@@ -62,9 +61,9 @@ public class CommentController {
             articleService.updateCommentCount(comment.getCommentArticleId());
         }catch (Exception e){
             e.printStackTrace();
-            return new JsonResult().fail();
+            return JsonResult.fail("操作失败");
         }
-        return new JsonResult().ok();
+        return JsonResult.ok("操作成功");
     }
 
 }
