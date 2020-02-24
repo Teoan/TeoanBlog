@@ -39,7 +39,7 @@ public class CommentController {
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
     public Map<String, Object> insertComment(HttpServletRequest request, Comment comment){
         comment.setCommentCreateTime(new Date());
-        comment.setCommentIp(MyUtils.getIpAddr(request));
+        comment.setCommentIp(HtmlUtil.escape(MyUtils.getIpAddr(request)));
 
         if(request.getSession().getAttribute("user")!=null){
             comment.setCommentRole(Role.ADMIN.getValue());

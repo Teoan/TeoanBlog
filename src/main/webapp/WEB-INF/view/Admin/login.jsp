@@ -134,7 +134,7 @@
                 data: $("#loginForm").serialize(),
                 dataType: "json",
                 success: function (data) {
-                    if(data.code==0) {
+                    if(data.code==1) {
                         alert(data.msg);
                     } else {
                         window.location.href="/admin";

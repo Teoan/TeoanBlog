@@ -52,7 +52,7 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">网站地址</label>
                                 <div class="layui-input-block">
-                                    <input type="url" name="linkUrl"  placeholder="如：" class="layui-input" required>
+                                    <input type="text" name="linkUrl"  placeholder="如：" class="layui-input" required>
                                 </div>
                             </div>
                             <div class="layui-form-item">

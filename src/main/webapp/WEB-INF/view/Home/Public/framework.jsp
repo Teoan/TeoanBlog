@@ -55,15 +55,13 @@
     <%@ include file="part/footer.jsp" %>
 </div>
 
-<script src="/js/jquery.min.js"/>
-<script src="/js/superfish.js"/>
-<script src='/js/sticky.js'/>
-<script src="/js/script.js"/>
-<script src="/plugin/layui/layui.all.js"/>
-
-
 <rapid:block name="footer-script"/>
 
 </body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/superfish.js"></script>
+<script src='/js/sticky.js'></script>
+<script src="/js/script.js"></script>
+<script src="/plugin/layui/layui.all.js"></script>
 </html>
 

@@ -1,5 +1,6 @@
 package com.teoan.blog.controller.home;
 
+import cn.hutool.http.HtmlUtil;
 import com.github.pagehelper.PageInfo;
 import com.teoan.blog.entity.*;
 import com.teoan.blog.enums.ArticleStatus;
@@ -83,6 +84,9 @@ public class IndexController {
 
         HashMap<String,Object> criteria = new HashMap<>(2);
         criteria.put("status", ArticleStatus.PUBLISH.getValue());
+        //防止xss
+        keywords = HtmlUtil.escape(keywords);
+        System.out.println(keywords);
         criteria.put("keywords",keywords);
         PageInfo<Article> articlePageInfo = articleService.pageArticle(pageIndex, pageSize, criteria);
         model.addAttribute("pageInfo", articlePageInfo);
@@ -99,7 +103,7 @@ public class IndexController {
         //最新评论
         List<Comment> recentCommentList = commentService.listRecentComment(10);
         model.addAttribute("recentCommentList", recentCommentList);
-
+        model.addAttribute("keywords",keywords);
         model.addAttribute("pageUrlPrefix", "/search?pageIndex");
         return "Home/Page/search";
     }

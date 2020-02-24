@@ -1,5 +1,6 @@
 package com.teoan.blog.controller.home;
 
+import cn.hutool.http.HtmlUtil;
 import com.teoan.blog.entity.Article;
 import com.teoan.blog.entity.Link;
 import com.teoan.blog.enums.LinkStatus;
@@ -37,6 +38,14 @@ public class LinkController {
     @RequestMapping(value = "/applyLinkSubmit",method = {RequestMethod.POST})
     @ResponseBody
     public void applyLinkSubmit(Link link)  {
+
+        //防止xss攻击
+        link.setLinkUrl(HtmlUtil.escape(link.getLinkUrl()));
+        link.setLinkName(HtmlUtil.escape(link.getLinkName()));
+        link.setLinkDescription(HtmlUtil.escape(link.getLinkDescription()));
+        link.setLinkOwnerContact(HtmlUtil.escape(link.getLinkOwnerContact()));
+
+
         link.setLinkStatus(LinkStatus.HIDDEN.getValue());
         link.setLinkCreateTime(new Date());
         link.setLinkUpdateTime(new Date());
