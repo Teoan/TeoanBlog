@@ -80,6 +80,7 @@ public class TestMapper extends TestSpring {
 //        logger.info(articleMapper.findAll(criteria));
 
         logger.info(categoryMapper.listCategort());
+        linkMapper.deleteById(9);
 
 
 

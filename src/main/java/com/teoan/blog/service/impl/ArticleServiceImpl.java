@@ -269,6 +269,6 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> listAllNotWithContent() {
-        return articleMapper.lisAllNotWithConten();
+        return articleMapper.listAllNotWithContent();
     }
 }

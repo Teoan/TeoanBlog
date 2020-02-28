@@ -14,11 +14,7 @@
     <title>${options.optionSiteTitle} &lsaquo; 登录</title>
     <link rel="stylesheet" href="/plugin/font-awesome/css/font-awesome.min.css">
     <link rel="shortcut icon" href="/img/logo.png">
-    <link rel='stylesheet' id='dashicons-css'  href='/plugin/login/dashicons.min.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='buttons-css'  href='/plugin/login/buttons.min.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='forms-css'  href='/plugin/login/forms.min.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='l10n-css'  href='/plugin/login/l10n.min.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='login-css'  href='/plugin/login/login.min.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="/plugin/layui/css/layui.css">
     <style type="text/css">
         body{
             font-family: "Microsoft YaHei", Helvetica, Arial, Lucida Grande, Tahoma, sans-serif;
@@ -26,41 +22,49 @@
             width:100%;
             height:100%;
         }
-        .login h1 a {
-            background-size: 220px 50px;
-            width: 220px;
-            height: 50px;
-            padding: 0;
-            margin: 0 auto 1em;
-        }
-        .login form {
-            background: #fff;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 2px;
-            border: 1px solid #fff;
-        }
-        .login label {
-            color: #000;
-            font-weight: bold;
-        }
 
         #backtoblog a, #nav a {
             color: #fff !important;
         }
 
-    </style><meta name='robots' content='noindex,follow' />
-    <meta name="viewport" content="width=device-width" />
-    <style>
-        body {
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            background-attachment: fixed;
+        #login{
+            text-align: center;
+            vertical-align: center;
+            background-color: #d2d2d2;
+            background-color:rgba(255, 255, 255, 0.6);
+            width: 400px;
+            height: 300px;
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+        }
+        /*#inputDiv{*/
+        /*    width: 260px;*/
+        /*    height: 100px;*/
+        /*    margin: auto;*/
+        /*    text-align: center;*/
+        /*}*/
+        #loginForm{
+            margin: auto;
+            width: 260px;
+            height: 150px;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
         }
     </style>
+    <meta name='robots' content='noindex,follow' />
+    <meta name="viewport" content="width=device-width" />
 </head>
-<body class="login login-action-login wp-core-ui  locale-zh-cn">
-<div id="login">
-    <h1><a href="/" title="欢迎您光临本站！" tabindex="-1">${options.optionSiteTitle}</a></h1>
+<body>
+<div id="login" >
     <%
         String username = "";
         String password = "";
@@ -74,20 +78,22 @@
             }
         }
     %>
-    <form name="loginForm" id="loginForm"  method="post">
-        <p>
-            <label for="user_login">用户名或电子邮件地址<br />
-                <input type="text" name="username" id="user_login" class="input" value="<%=username%>" size="20" required/></label>
-        </p>
-        <p>
-            <label for="user_pass">密码<br />
-                <input type="password" name="password" id="user_pass" class="input" value="<%=password%>" size="20" required/>
-            </label>
-        </p>
-        <p class="forgetmenot"><label for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="1" checked /> 记住密码</label></p>
-        <p class="submit">
-            <input type="button" name="wp-submit" id="submit-btn" class="button button-primary button-large" value="登录" />
-        </p>
+    <form name="loginForm" id="loginForm"  class="layui-form" method="post" >
+        <div id="inputDiv">
+            <div class="layui-form-item">
+                <input type="text" name="username" id="user_login" class="layui-input" placeholder="请输入账号或者邮箱" value="<%=username%>"  required/>
+            </div>
+            <div class="layui-form-item">
+                <input type="password" name="password" id="user_pass" class="layui-input" placeholder="请输入密码" value="<%=password%>"  required/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <input name="rememberme" type="checkbox" lay-skin="primary" id="rememberme" value="1" title="记住密码" checked />
+            <input type="button" name="wp-submit" id="submit-btn" class="layui-btn" value="登录" />
+        </div>
+        <div class="layui-form-item">
+            <a href="/">&larr; 返回到风吟博客</a>
+        </div>
     </form>
 
 
@@ -106,14 +112,14 @@
         if(typeof wpOnload=='function')wpOnload();
     </script>
 
-    <p id="backtoblog"><a href="/">&larr; 返回到风吟博客</a></p>
-
 </div>
 
 
-<div class="clear"></div>
+
+
 
 <script src="/js/jquery.min.js"></script>
+<script src="/plugin/layui/layui.all.js"></script>
 <script type="text/javascript">
 
 

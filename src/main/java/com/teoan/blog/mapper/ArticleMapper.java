@@ -49,7 +49,7 @@ public interface ArticleMapper {
      * @Param:
      * @return:
      */
-    List<Article> lisAllNotWithConten();
+    List<Article> listAllNotWithContent();
 
     /**
      * @Description: 获取文章总数
